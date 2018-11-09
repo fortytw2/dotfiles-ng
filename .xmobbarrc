@@ -1,0 +1,19 @@
+Config { font = "xft:Iosevka:size=10:antialias=true"
+       , bgColor = "#252932"
+       , fgColor = "#a7adba"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Weather "KDFW" ["-t","weather - <tempF> F","-L","18","-H","25","--normal","#dfe1e8","--high","#a93642","--low","#268bd2"] 36000
+                    , Run Cpu ["-t", "CPU - <total>%", "-L","3","-H","50","--normal","#dfe1e8","--high","#a93642"] 10
+                    , Run Memory ["-t","RAM - <usedratio>%"] 10
+		    , Run ThermalZone 0 ["-t","<temp> C","-L","30","-H","70","-h","#a93642","-n","#ebcb8b","-l","#dfe1e8"] 10
+                    , Run Battery ["-t","<left>%","-L","50","-H","75","-h","#dfe1e8","-n","#dfe1e8","-l","#dfe1e8"] 10                    
+		    , Run Network "wlp61s0" ["-t","network - <rx>KB/<tx>KB","-L","0","-H","32","--normal","#dfe1e8","--high","#a93642"] 10
+                    , Run Com "uname" ["-r"] "" 36000
+		    , Run StdinReader
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% | %cpu% | %thermal0% | %memory% | %wlp61s0% }{ <fc=#518cc7>%date%</fc> | %DFW% | %uname% | %battery%"
+       }
